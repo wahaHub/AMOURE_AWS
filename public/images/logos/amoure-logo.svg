@@ -1,0 +1,40 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 粉色渐变定义 -->
+  <defs>
+    <linearGradient id="pinkGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B9D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8FA3;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景心形山峰 -->
+  <path d="M20 70 Q30 50 40 70 Q50 50 60 70 Q70 50 80 70 L80 85 L20 85 Z" fill="url(#pinkGradient)" opacity="0.6"/>
+  
+  <!-- 左侧小心形 -->
+  <path d="M25 25 C20 20 10 20 10 30 C10 35 15 40 25 45 C35 40 40 35 40 30 C40 20 30 20 25 25 Z" fill="#FF6B9D" opacity="0.8"/>
+  
+  <!-- 右侧小心形 -->
+  <path d="M75 25 C70 20 60 20 60 30 C60 35 65 40 75 45 C85 40 90 35 90 30 C90 20 80 20 75 25 Z" fill="#FF6B9D" opacity="0.8"/>
+  
+  <!-- 中央人物剪影 -->
+  <g transform="translate(35, 15)">
+    <!-- 男性人物 -->
+    <circle cx="8" cy="8" r="4" fill="#FF1744"/>
+    <rect x="5" y="12" width="6" height="12" rx="1" fill="#FF1744"/>
+    <rect x="3" y="14" width="3" height="8" rx="1" fill="#FF1744"/>
+    <rect x="14" y="14" width="3" height="8" rx="1" fill="#FF1744"/>
+    <rect x="6" y="24" width="2" height="6" rx="1" fill="#FF1744"/>
+    <rect x="10" y="24" width="2" height="6" rx="1" fill="#FF1744"/>
+    
+    <!-- 女性人物 -->
+    <circle cx="22" cy="8" r="4" fill="#FF1744"/>
+    <path d="M18 12 L26 12 L28 20 L26 24 L18 24 L16 20 Z" fill="#FF1744"/>
+    <rect x="16" y="14" width="3" height="8" rx="1" fill="#FF1744"/>
+    <rect x="25" y="14" width="3" height="8" rx="1" fill="#FF1744"/>
+    <rect x="19" y="24" width="2" height="6" rx="1" fill="#FF1744"/>
+    <rect x="23" y="24" width="2" height="6" rx="1" fill="#FF1744"/>
+    
+    <!-- 牵手连接 -->
+    <line x1="12" y1="16" x2="18" y2="16" stroke="#FF1744" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg> 

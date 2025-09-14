@@ -1,0 +1,1098 @@
+{
+    "info": {
+        "name": "Amoure V1 APIs - Accurate Final",
+        "description": "Complete V1 API collection based on real controller analysis",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "value": "{{authToken}}",
+                "type": "string"
+            }
+        ]
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://amoure-dev-alb-1565128266.us-east-1.elb.amazonaws.com",
+            "type": "string"
+        },
+        {
+            "key": "authToken",
+            "value": "",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "V1 Authentication",
+            "item": [
+                {
+                    "name": "Login",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"loginType\": 1,\n  \"mobile\": \"13800138000\",\n  \"smsCode\": \"888888\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/auth/login",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "auth",
+                                "login"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/auth/logout",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "auth",
+                                "logout"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Deactivate Account",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/auth/deactivate",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "auth",
+                                "deactivate"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "V1 User Management",
+            "item": [
+                {
+                    "name": "Save Basic Info",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nickname\": \"TestUser\",\n  \"birthDate\": \"1998-01-01\",\n  \"gender\": 1,\n  \"locationCode\": \"310000\",\n  \"locationName\": \"Shanghai\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/user/saveBasicInfo",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "user",
+                                "saveBasicInfo"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Basic Info",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/user/getBasicInfo",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "user",
+                                "getBasicInfo"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Save Profile",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"bio\": \"My bio\",\n  \"location\": \"Shanghai\",\n  \"interests\": [\"music\", \"travel\"]\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/user/saveProfile",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "user",
+                                "saveProfile"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Profile",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/user/getProfile",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "user",
+                                "getProfile"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Get User Detail",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"userId\": null\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/user/getUserDetail",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "user",
+                                "getUserDetail"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "V1 Interactions",
+            "item": [
+                {
+                    "name": "Like User List",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"current\": 1,\n  \"pageSize\": 10,\n  \"type\": \"LIKE_ME\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/interaction/likeUserList",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "interaction",
+                                "likeUserList"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Mark Like",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"targetUserId\": 2,\n  \"type\": \"LIKE\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/interaction/markLike",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "interaction",
+                                "markLike"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "V1 Recommendation",
+            "item": [
+                {
+                    "name": "Get Recommend Users",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"minAge\": 18,\n  \"maxAge\": 35,\n  \"locationCode\": \"310000\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/recommend/users",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "recommend",
+                                "users"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "V1 Posts",
+            "item": [
+                {
+                    "name": "Publish Post",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"content\": \"Hello world!\",\n  \"imageUrls\": [\"https://example.com/image.jpg\"],\n  \"visibility\": \"PUBLIC\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/post/publishPost",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "post",
+                                "publishPost"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Query Post List",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"current\": 1,\n  \"pageSize\": 10,\n  \"userId\": null\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/post/queryPostList",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "post",
+                                "queryPostList"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Like Post",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"postId\": 1,\n  \"isLike\": true\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/post/likePost",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "post",
+                                "likePost"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete Post",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"postId\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/app/post/deletePost",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "app",
+                                "post",
+                                "deletePost"
+                            ]
+                        }
+                    },
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "type": "text/javascript",
+                                "exec": [
+                                    "// Standard assertions for Amoure APIs",
+                                    "pm.test('HTTP Status should be 200', function () {",
+                                    "    pm.response.to.have.status(200);",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should be valid JSON', function () {",
+                                    "    pm.response.to.be.json;",
+                                    "});",
+                                    "",
+                                    "pm.test('Response should have success field', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.expect(response).to.have.property('success');",
+                                    "});",
+                                    "",
+                                    "pm.test('Business logic should be successful', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.success === false) {",
+                                    "        console.log('❌ API Business Logic Failed:');",
+                                    "        console.log('Error Code:', response.code);",
+                                    "        console.log('Message:', response.msg);",
+                                    "        console.log('Error Detail:', response.errorDetail);",
+                                    "    }",
+                                    "    pm.expect(response.success).to.be.true;",
+                                    "});",
+                                    "",
+                                    "pm.test('Should not have system errors', function () {",
+                                    "    const response = pm.response.json();",
+                                    "    if (response.error) {",
+                                    "        console.log('❌ System Error Found:', response.error);",
+                                    "    }",
+                                    "    pm.expect(response.error).to.be.oneOf([null, undefined, '']);",
+                                    "});"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

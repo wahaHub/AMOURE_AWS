@@ -1,0 +1,101 @@
+{
+  "scenarios": {
+    "smoke_test": {
+      "name": "冒烟测试",
+      "description": "快速验证核心功能",
+      "tests": [
+        "V1 SMS Login",
+        "V1 Get User Info", 
+        "V2 SMS Login",
+        "V2 Get User Detail"
+      ]
+    },
+    "user_interaction_flow": {
+      "name": "用户交互流程",
+      "description": "完整的用户社交交互测试",
+      "tests": [
+        "V2 SMS Login",
+        "V2 Get Recommendations",
+        "V2 User Interaction - Like",
+        "V2 Get Xindong List - Liked by Me",
+        "V2 User Interaction - Super Like",
+        "V2 Get Xindong List - I Liked"
+      ]
+    },
+    "file_storage_test": {
+      "name": "文件存储测试", 
+      "description": "S3文件上传下载功能",
+      "tests": [
+        "V1 SMS Login",
+        "V1 File Upload",
+        "V1 File Download",
+        "V1 File Delete"
+      ]
+    },
+    "session_consistency": {
+      "name": "会话一致性测试",
+      "description": "Redis Session跨服务器共享",
+      "tests": [
+        "V1 SMS Login",
+        "V1 Get User Info",
+        "V2 Get User Detail (same token)",
+        "V2 User Interaction (same token)"
+      ]
+    },
+    "cross_version_compatibility": {
+      "name": "跨版本兼容性",
+      "description": "V1和V2数据一致性验证",
+      "tests": [
+        "V1 SMS Login",
+        "V1 Get User Info",
+        "V1 Like User",
+        "V2 SMS Login",
+        "V2 Get Xindong List",
+        "Verify V1/V2 data consistency"
+      ]
+    }
+  },
+  "test_data": {
+    "valid_users": [
+      {
+        "mobile": "13800138000",
+        "smsCode": "888888",
+        "expectedUserId": 1,
+        "nickname": "测试用户1"
+      },
+      {
+        "mobile": "13800138001", 
+        "smsCode": "888888",
+        "expectedUserId": 2,
+        "nickname": "测试用户2"
+      }
+    ],
+    "interaction_types": [
+      "like",
+      "super_like", 
+      "pass",
+      "block",
+      "unblock"
+    ],
+    "xindong_filters": [
+      "all",
+      "recent_online",
+      "profile_complete", 
+      "verified"
+    ]
+  },
+  "validation_rules": {
+    "response_time": {
+      "max_acceptable": 3000,
+      "warning_threshold": 2000
+    },
+    "success_rate": {
+      "minimum": 95
+    },
+    "required_fields": {
+      "login_response": ["code", "data.token", "data.userId"],
+      "user_info": ["code", "data.userId", "data.userInfo"],
+      "interaction_response": ["code", "data.targetUserId", "data.isMatched"]
+    }
+  }
+}
